@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Card.corner.50" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/card_background</item>
+        <item name="cardCornerRadius">@dimen/_50dp</item>
+        <item name="cardElevation">@dimen/_5dp</item>
+    </style>
+
+    <style name="Card.color.50" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/orange</item>
+        <item name="cardCornerRadius">@dimen/_50dp</item>
+    </style>
+
+    <style name="ImageView.round" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+</resources>

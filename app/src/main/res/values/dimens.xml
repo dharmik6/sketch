@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="_1dp">1dp</dimen>
+    <dimen name="_2dp">2dp</dimen>
+    <dimen name="_3dp">3dp</dimen>
+    <dimen name="_4dp">4dp</dimen>
+    <dimen name="_5dp">5dp</dimen>
+    <dimen name="_10dp">10dp</dimen>
+    <dimen name="_12dp">12dp</dimen>
+    <dimen name="_15dp">15dp</dimen>
+    <dimen name="_50dp">50dp</dimen>
+
+
+    <dimen name="padding">20dp</dimen>
+    <dimen name="card_padding">15dp</dimen>
+    <dimen name="icon_margin">10dp</dimen>
+
+    <dimen name="main_screen_side_padding">20dp</dimen>
+    <dimen name="overall_margin">20dp</dimen>
+    <dimen name="_24dp">24dp</dimen>
+</resources>
