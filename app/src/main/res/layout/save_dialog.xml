@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:background="@drawable/bg_dialog"
     android:gravity="center"
-    android:background="@drawable/bg_dialog">
+    android:orientation="vertical">
 
     <TextView
+        style="@style/TextView.Font.Medium.16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/TextView.Font.Medium.16"
-        android:text="@string/exit"
         android:padding="@dimen/_20dp"
-        android:textColor="@color/grey"/>
+        android:text="@string/exit"
+        android:textColor="@color/grey" />
+
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:dividerColor="@color/light_grey"/>
+        app:dividerColor="@color/light_grey" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,36 +26,38 @@
         android:gravity="center"
         android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/exit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/TextView.Font.Medium.14"
-                android:text="@string/exit"
-                android:padding="@dimen/_20dp"
-                android:textAlignment="center"
-                android:background="?android:attr/selectableItemBackground"
-                android:textColor="@color/grey"/>
+        <TextView
+            android:id="@+id/exit"
+            style="@style/TextView.Font.Medium.14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="@dimen/_20dp"
+            android:text="@string/exit"
+            android:textAlignment="center"
+            android:textColor="@color/grey" />
+
         <TextView
             android:id="@+id/save_and_exit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/TextView.Font.Medium.14"
-                android:text="@string/save_and_exit"
-                android:padding="@dimen/_20dp"
-            android:textAlignment="center"
+            style="@style/TextView.Font.Medium.14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
-                android:textColor="@color/grey"/>
+            android:padding="@dimen/_20dp"
+            android:text="@string/save_and_exit"
+            android:textAlignment="center"
+            android:textColor="@color/grey" />
+
         <TextView
             android:id="@+id/cancel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/TextView.Font.Medium.14"
-                android:text="@string/cancel"
-                android:padding="@dimen/_20dp"
-            android:textAlignment="center"
+            style="@style/TextView.Font.Medium.14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
-                android:textColor="@color/grey"/>
+            android:padding="@dimen/_20dp"
+            android:text="@string/cancel"
+            android:textAlignment="center"
+            android:textColor="@color/grey" />
 
     </LinearLayout>
 </LinearLayout>

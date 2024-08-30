@@ -1,23 +1,24 @@
 package com.mysketch.ui.drawing
 
+import android.Manifest
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore.Images
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.SeekBar
-import android.window.OnBackInvokedDispatcher
-import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
-import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
 import com.github.dhaval2404.colorpicker.ColorPickerDialog
 import com.github.dhaval2404.colorpicker.model.ColorShape
@@ -28,12 +29,15 @@ import com.mysketch.databinding.BrushSettingsBinding
 import com.mysketch.databinding.MenuPopupBinding
 import com.mysketch.databinding.SaveDialogBinding
 import com.mysketch.ui.dialog.BrushTools
+import com.mysketch.utils.AppConstant
+import com.mysketch.utils.saveImageToExternalStorage
 import com.mysketch.utils.showToast
 import com.raed.rasmview.RasmContext
 import com.raed.rasmview.brushtool.data.Brush
 import com.raed.rasmview.brushtool.data.BrushesRepository
 import com.raed.rasmview.brushtool.model.BrushConfig
 import com.raed.rasmview.state.RasmState
+import java.io.File
 import java.io.OutputStream
 
 
@@ -293,6 +297,7 @@ class DrawingActivity : BaseActivity(), OnClickListener, BrushTools.OnSelectBrus
             5 -> {
                 brushConfig = brushesRepository.get(Brush.HardEraser)
                 rasmContext.brushConfig = brushConfig
+                rasmContext.brushConfig.isEraser = true
                 setBrushSeekBar()
             }
 
@@ -343,6 +348,7 @@ class DrawingActivity : BaseActivity(), OnClickListener, BrushTools.OnSelectBrus
                         ContextCompat.getColor(this@DrawingActivity, R.color.light_grey),
                         android.graphics.PorterDuff.Mode.SRC_IN
                     )
+                    binding.board.setImageDrawable(getDrawable(R.drawable.maximize))
 
                 } else {
                     // hide icons
@@ -357,6 +363,7 @@ class DrawingActivity : BaseActivity(), OnClickListener, BrushTools.OnSelectBrus
                         ContextCompat.getColor(this@DrawingActivity, R.color.black),
                         android.graphics.PorterDuff.Mode.SRC_IN
                     )
+                    binding.board.setImageDrawable(getDrawable(R.drawable.fullscreen))
 
                 }
                 isBoardSelected = !isBoardSelected
@@ -378,22 +385,16 @@ class DrawingActivity : BaseActivity(), OnClickListener, BrushTools.OnSelectBrus
         menuPopupWindow.elevation = 2f
 
         menuPopupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
-        val popupWidth = menuPopupView.measuredWidth
 
         menuPopBinding.newSketch.setOnClickListener {
             newSketch()
         }
-        menuPopBinding.gallery.setOnClickListener {
-            gallery()
-        }
         menuPopBinding.save.setOnClickListener {
-            save()
+            if (checkPermission())
+                save()
         }
         menuPopBinding.share.setOnClickListener {
             share()
-        }
-        menuPopBinding.preference.setOnClickListener {
-            preference()
         }
         val offsetX = 0
         val offsetY = -anchorView.height - menuPopupView.measuredHeight - 15
@@ -406,15 +407,25 @@ class DrawingActivity : BaseActivity(), OnClickListener, BrushTools.OnSelectBrus
     }
 
     private fun newSketch() {
-
-    }
-
-    private fun gallery() {
-
+        rasmContext.clear()
     }
 
     private fun save() {
+        val bitmap = rasmContext.exportRasm() // Your bitmap here
+        val savedImagePath = saveImageToExternalStorage(bitmap)
 
+        if (savedImagePath != null) {
+            showToast("Sketch saved")
+
+            // Notify media scanner
+            val file = File(savedImagePath)
+            val uri = Uri.fromFile(file)
+            val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
+            intent.data = uri
+            sendBroadcast(intent)
+        } else {
+            Log.e(TAG, "save: image not saved")
+        }
     }
 
     private fun share() {
@@ -457,23 +468,42 @@ class DrawingActivity : BaseActivity(), OnClickListener, BrushTools.OnSelectBrus
             .create()
         alertDialog.show()
 
-        dialogBinding.exit.setOnClickListener{
+        dialogBinding.exit.setOnClickListener {
             alertDialog.dismiss()
             super.onBackPressed()
         }
 
-        dialogBinding.saveAndExit.setOnClickListener{
+        dialogBinding.saveAndExit.setOnClickListener {
             // add save method
             alertDialog.dismiss()
             super.onBackPressed()
         }
 
-        dialogBinding.cancel.setOnClickListener{
+        dialogBinding.cancel.setOnClickListener {
             alertDialog.dismiss()
         }
 
     }
 
 
+    fun checkPermission(): Boolean {
 
+        return if (ContextCompat.checkSelfPermission(
+                this, Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_DENIED && ContextCompat.checkSelfPermission(
+                this, Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_DENIED
+        ) {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ), AppConstant.GALLERY_INTENT_REQUEST_CODE
+            )
+            return false
+        } else {
+            return true
+        }
+    }
 }

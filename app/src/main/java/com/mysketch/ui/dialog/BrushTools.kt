@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.mysketch.R
 import com.mysketch.adapter.BrushToolAdapter
 import com.mysketch.adapter.OnSelectBrush
@@ -16,15 +14,15 @@ import com.mysketch.databinding.BrushToolsBinding
 import com.mysketch.ui.data.model.BrushModel
 import com.mysketch.utils.showToast
 
-class BrushTools : DialogFragment() , OnSelectBrush {
+class BrushTools : DialogFragment(), OnSelectBrush {
     lateinit var binding: BrushToolsBinding
-    lateinit var adapter : BrushToolAdapter
+    lateinit var adapter: BrushToolAdapter
 
     private var onDismissListener: OnDismissListener? = null
 
     private var onSelectBrushListener: OnSelectBrushListener? = null
 
-    val brushList : List<BrushModel> = listOf(
+    val brushList: List<BrushModel> = listOf(
         BrushModel(brushName = "Pencil", R.drawable.brush),
         BrushModel(brushName = "Pen", R.drawable.brush),
         BrushModel(brushName = "Calligraphy", R.drawable.brush),
@@ -33,6 +31,7 @@ class BrushTools : DialogFragment() , OnSelectBrush {
         BrushModel(brushName = "HardEraser", R.drawable.brush),
         BrushModel(brushName = "SoftEraser", R.drawable.brush),
     )
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,8 +39,8 @@ class BrushTools : DialogFragment() , OnSelectBrush {
     ): View {
         binding = BrushToolsBinding.inflate(layoutInflater)
 
-        binding.rvBrushTools.layoutManager = GridLayoutManager(requireContext(),4)
-        adapter = BrushToolAdapter(requireContext(),brushList,this)
+        binding.rvBrushTools.layoutManager = GridLayoutManager(requireContext(), 4)
+        adapter = BrushToolAdapter(requireContext(), brushList, this)
         binding.rvBrushTools.adapter = adapter
         return binding.root
     }
@@ -69,7 +68,8 @@ class BrushTools : DialogFragment() , OnSelectBrush {
         super.onDismiss(dialog)
         onDismissListener?.onDismiss()
     }
-    interface OnSelectBrushListener{
+
+    interface OnSelectBrushListener {
         fun selectedBrushId(id: Int)
     }
 

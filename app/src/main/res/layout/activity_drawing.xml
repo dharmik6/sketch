@@ -106,7 +106,7 @@
                     android:id="@+id/board"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/clipboard"
+                    android:src="@drawable/maximize"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="@dimen/_10dp"
                     app:tint="@color/light_grey"/>
