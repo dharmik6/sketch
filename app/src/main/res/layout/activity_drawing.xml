@@ -5,43 +5,19 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.DrawingActivity"
-    android:background="@color/white">
+    tools:context=".ui.drawing.DrawingActivity"
+    android:background="@color/canvas_background">
 
 
-    <com.mysketch.utils.drawing.DrawingView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/Card.corner.50"
-        android:layout_margin="@dimen/overall_margin"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:layout_alignParentStart="true">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10dp"
-            android:src="@drawable/arrow_back"/>
-    </com.google.android.material.card.MaterialCardView>
+    <com.raed.rasmview.RasmView
+        android:id="@+id/rasmView"
+        android:layout_width="1000dp"
+        android:layout_height="1000dp"
+        />
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/Card.corner.50"
-        android:layout_margin="@dimen/overall_margin"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:layout_alignParentEnd="true">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10dp"
-            android:src="@drawable/file_download" />
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Card.corner.50"
@@ -53,13 +29,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <LinearLayout
+                android:id="@+id/icon_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_10dp"
                 android:orientation="horizontal"
                 android:gravity="center">
 
+                <ImageView
+                    android:id="@+id/menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/logs"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/_10dp"
+                    app:tint="@color/light_grey"
+                    />
+
                 <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/undo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/undo"
@@ -67,46 +54,63 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="@dimen/_10dp"/>
                 <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/redo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/redo"
                     android:foreground="?android:attr/selectableItemBackground"
                     app:shapeAppearance="@style/ImageView.round"
                     android:padding="@dimen/_10dp"/>
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/hand"
-                    android:padding="@dimen/_10dp"
-                    android:background="@drawable/icon_select_indecator"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/shapes"
-                    android:padding="@dimen/_10dp"/>
-                <ImageView
+                    android:id="@+id/brush_tools"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/brush"
-                    android:padding="@dimen/_10dp"
-                    />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/eraser"
-                    android:padding="@dimen/_10dp"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/shapes"
-                    android:padding="@dimen/_10dp"/>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="@dimen/_24dp"
-                    android:layout_height="@dimen/_24dp"
-                    style="@style/Card.color.50"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:layout_margin="@dimen/_10dp"/>
+                    android:padding="@dimen/_10dp"
+                    app:tint="@color/light_grey"
+                    />
+
+                <ImageView
+                    android:id="@+id/brush_settings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/settings_slider"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/_10dp"
+                    app:tint="@color/light_grey"/>
+
+
+                <RelativeLayout
+                    android:id="@+id/color_picker"
+                    android:layout_width="wrap_content"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/color_card"
+                        android:layout_width="@dimen/_24dp"
+                        android:layout_height="@dimen/_24dp"
+                        style="@style/Card.color.50"
+                        android:layout_centerInParent="true"
+
+                        android:layout_margin="@dimen/_10dp"/>
+                    <ImageView
+                        android:layout_width="@dimen/_24dp"
+                        android:layout_height="@dimen/_24dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/colorpicker"/>
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/board"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/clipboard"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/_10dp"
+                    app:tint="@color/light_grey"/>
+
             </LinearLayout>
         </HorizontalScrollView>
 

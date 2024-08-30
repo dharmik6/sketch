@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+<!--     card view design-->
     <style name="Card.corner.50" parent="Widget.Material3.CardView.Filled">
         <item name="cardBackgroundColor">@color/card_background</item>
         <item name="cardCornerRadius">@dimen/_50dp</item>
@@ -10,8 +11,29 @@
     <style name="Card.color.50" parent="Widget.Material3.CardView.Filled">
         <item name="cardBackgroundColor">@color/orange</item>
         <item name="cardCornerRadius">@dimen/_50dp</item>
+        <item name="strokeWidth">@dimen/_4dp</item>
+        <item name="strokeColor">@color/white</item>
+
+
     </style>
 
+
+<!--    Textview-->
+    <style name="TextView.Font.Medium.14" parent="Widget.AppCompat.TextView">
+       <item name="android:textColor">@color/dark_grey</item>
+       <item name="android:textSize">@dimen/_14dp</item>
+    </style>
+    <style name="TextView.Font.Medium.16" parent="Widget.AppCompat.TextView">
+       <item name="android:textColor">@color/dark_grey</item>
+       <item name="android:textSize">@dimen/_16dp</item>
+        <item name="android:textStyle"> bold</item>
+    </style>
+
+    <style name="TextView.Font.Medium.12" parent="Widget.AppCompat.TextView">
+       <item name="android:textSize">@dimen/_12dp</item>
+    </style>
+
+<!--     Imageview-->
     <style name="ImageView.round" parent="">
         <item name="cornerSize">50%</item>
     </style>

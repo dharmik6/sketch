@@ -7,7 +7,10 @@
     <dimen name="_5dp">5dp</dimen>
     <dimen name="_10dp">10dp</dimen>
     <dimen name="_12dp">12dp</dimen>
+    <dimen name="_14dp">14dp</dimen>
     <dimen name="_15dp">15dp</dimen>
+    <dimen name="_16dp">16dp</dimen>
+    <dimen name="_20dp">20dp</dimen>
     <dimen name="_50dp">50dp</dimen>
 
 
@@ -18,4 +21,6 @@
     <dimen name="main_screen_side_padding">20dp</dimen>
     <dimen name="overall_margin">20dp</dimen>
     <dimen name="_24dp">24dp</dimen>
+    <dimen name="_0dp">0dp</dimen>
+    <dimen name="_200dp">200dp</dimen>
 </resources>

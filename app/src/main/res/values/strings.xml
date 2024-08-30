@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">MySketch</string>
+    <string name="brush_size">Brush size</string>
+    <string name="flow">Flow</string>
+    <string name="opacity">Opacity</string>
+    <string name="brush">brush</string>
+    <string name="new_sketch">New sketch</string>
+    <string name="preference">Preference</string>
+    <string name="share">Share</string>
+    <string name="save">Save</string>
+    <string name="gallery">Gallery</string>
+    <string name="exit">Exit</string>
+    <string name="cancel">Cancel</string>
+    <string name="save_and_exit">Save and Exit</string>
 </resources>
